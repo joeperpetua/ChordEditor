@@ -1,0 +1,20 @@
+
+<div class="navbar-container">
+    <div class="burger" (click)="toggleMenu()">
+        @if (menuOpened) {
+            <i class="fa-solid fa-xmark"></i>
+        } @else {
+            <i class="fa-solid fa-bars"></i>
+        }
+    </div>
+    <div class="title">{{title}}</div>
+</div>
+
+@if (menuOpened) {
+    <div class="menu">
+        @for (item of navbarItems; track item.text) {
+            <a href="{{item.url}}" class="menu-item">{{item.text}}</a>
+        }
+    </div>
+}
+

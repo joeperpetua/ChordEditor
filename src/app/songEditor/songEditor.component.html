@@ -1,0 +1,34 @@
+<div class="song-info">
+    <h1 (click)="toggleInfo()">
+        @if (displayInfo) {
+            <i class="fa-solid fa-chevron-up"></i>
+        } @else {
+            <i class="fa-solid fa-chevron-up fa-rotate-180"></i>
+        }
+        Song information
+    </h1>
+    @if (displayInfo) {
+        <label for="song-title">Title
+            <input type="text" name="song-title" id="song-title" placeholder="Type the song title" (change)="updateTitle($event)">
+        </label>
+    
+        <label for="song-title">Author
+            <input type="text" name="song-author" id="song-author" placeholder="Type the song author" (change)="updateAuthor($event)">
+        </label>
+    
+        <label for="song-title">Key
+            <input type="text" name="song-key" id="song-key" placeholder="Type the song key" (change)="updateKey($event)">
+        </label>
+    }
+</div>
+
+<div class="song-source">
+    <h1>Song lyrics</h1>
+    <p>Separate each section with 2 blank lines.</p>
+    <textarea name="song-lyrics" id="song-lyrics"></textarea>
+</div>
+
+<div class="song-content">
+    <div class="chord-blocks"></div>
+    <div class="word-blocks"></div>
+</div>

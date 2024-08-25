@@ -1,0 +1,25 @@
+.song-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.song-info h1 {
+    cursor: pointer;
+    user-select: none;
+    width: fit-content;
+}
+
+.song-info label {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.song-info input {
+    padding: 1rem;
+    width: 50%;
+    border: solid grey 1;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+}
