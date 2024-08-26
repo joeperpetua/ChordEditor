@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
+import { FormsModule } from '@angular/forms';
 
 interface SongWord {
     text: string,
-    chord : string
+    chords: string[] 
 }
 
 interface SongLine {
@@ -18,7 +19,8 @@ interface SongSection {
     selector: 'SongEditor',
     standalone: true,
     templateUrl: './songEditor.component.html',
-    styleUrl: './songEditor.component.css'
+    styleUrl: './songEditor.component.css',
+    imports: [FormsModule]
 })
 
 export class SongEditor {
@@ -48,8 +50,39 @@ export class SongEditor {
         this.songKey = target.value;
     }
 
+    updateSectionName(ev: Event){
+        const target = ev.target as HTMLHeadingElement;
+        if (!target.textContent)
+            return
+        const index = parseInt(target.id.replace('section-', ''));
+        this.songSections[index].name = target.textContent;
+    }
+
+    updateChord(ev: Event, section: number, line: number, word: number, chord: number){
+        const target = ev.target as HTMLDivElement;
+        if (!target.textContent)
+            return
+
+        const inputText = target.textContent;
+        this.songSections[section].lines[line].words[word].chords[chord] = inputText;
+        target.textContent = inputText; // Re-set element text to avoid double characters due to re-rendering.
+
+        // Set caret to end of text
+        const range = document.createRange();
+        const selection = window.getSelection();
+        range.selectNodeContents(target);
+        range.collapse(false);
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+    }
+
+    exportSong() {
+        console.log(this.songSections);
+    }
+
     processText() {
-        const rawText = document.querySelector('.song-source')?.querySelector('textarea')?.value;
+        // const rawText = document.querySelector('.song-source')?.querySelector('textarea')?.value;
+        const rawText = this.songText;
         if (!rawText)
             return
 
@@ -63,7 +96,7 @@ export class SongEditor {
                 let words = line.split(' ');
                 let lineWords: SongWord[] = [];
                 words.forEach(word => {
-                    lineWords.push({'text': word, 'chord': ''});
+                    lineWords.push({'text': word, 'chords': ['', '', '']});
                 });
                 sectionLines.push({words: lineWords})
             })
