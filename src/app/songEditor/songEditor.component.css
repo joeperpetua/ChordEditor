@@ -1,3 +1,7 @@
+.song-editor {
+    padding: 1rem;
+}
+
 .song-info {
     display: flex;
     flex-direction: column;

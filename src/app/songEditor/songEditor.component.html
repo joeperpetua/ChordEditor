@@ -1,64 +1,66 @@
-<div class="song-info">
-    <h1 (click)="toggleInfo()">
-        @if (displayInfo) {
-            <i class="fa-solid fa-chevron-up"></i>
-        } @else {
-            <i class="fa-solid fa-chevron-up fa-rotate-180"></i>
-        }
-        Song information
-    </h1>
-    @if (displayInfo) {
-        <label for="song-title">Title
-            <input type="text" name="song-title" id="song-title" placeholder="Type the song title" (change)="updateTitle($event)">
-        </label>
-    
-        <label for="song-title">Author
-            <input type="text" name="song-author" id="song-author" placeholder="Type the song author" (change)="updateAuthor($event)">
-        </label>
-    
-        <label for="song-title">Key
-            <input type="text" name="song-key" id="song-key" placeholder="Type the song key" (change)="updateKey($event)">
-        </label>
-    }
-</div>
-
-<div class="song-source">
-    <h1>Song lyrics</h1>
-    <p><i>Separate each section with 1 blank line.</i></p>
-
-    <textarea [(ngModel)]="songText"></textarea>
-    <button (click)="processText()">Generate editor</button>
-</div>
-
-<div class="song-content">
-    @if (songSections.length > 0) {
-        <p><i>Fill in the chords using the grey blocks.</i></p>
-    }
-    @for (section of songSections; track section; let sectionIndex = $index) {
-        <div class="song-section">
-            <h3 contenteditable="true" (keyup)="updateSectionName($event)" id="section-{{sectionIndex}}">{{section.name}}</h3>
-            @for (line of section.lines; track line; let lineIndex = $index) {
-                <div class="song-line">
-                    @for (word of line.words; track word; let wordIndex = $index){
-                        <div class="in-between-block">
-                            <div class="chord-block" contenteditable="true" (input)="updateChord($event, sectionIndex, lineIndex, wordIndex, 0)">{{word.chords[0]}}</div>
-                        </div>
-                        <div class="song-word">
-                            <div class="chord-block" contenteditable="true" (input)="updateChord($event, sectionIndex, lineIndex, wordIndex, 1)">{{word.chords[1]}}</div>
-                            <div class="text-block">{{word.text}}</div>
-                        </div>
-                        @if (wordIndex === line.words.length -1) {
-                            <div class="in-between-block">
-                                <div class="chord-block" contenteditable="true" (input)="updateChord($event, sectionIndex, lineIndex, wordIndex, 2)">{{word.chords[2]}}</div>
-                            </div>
-                        }
-                    } 
-                </div>
+<div class="song-editor">
+    <div class="song-info">
+        <h1 (click)="toggleInfo()">
+            @if (displayInfo) {
+                <i class="fa-solid fa-chevron-up"></i>
+            } @else {
+                <i class="fa-solid fa-chevron-up fa-rotate-180"></i>
             }
-        </div>
-    }
-</div>
+            Song information
+        </h1>
+        @if (displayInfo) {
+            <label for="song-title">Title
+                <input type="text" name="song-title" id="song-title" placeholder="Type the song title" (change)="updateTitle($event)">
+            </label>
+        
+            <label for="song-title">Author
+                <input type="text" name="song-author" id="song-author" placeholder="Type the song author" (change)="updateAuthor($event)">
+            </label>
+        
+            <label for="song-title">Key
+                <input type="text" name="song-key" id="song-key" placeholder="Type the song key" (change)="updateKey($event)">
+            </label>
+        }
+    </div>
 
-<div class="export-actions">
-    <button (click)="exportSong()">Export song</button>
+    <div class="song-source">
+        <h1>Song lyrics</h1>
+        <p><i>Separate each section with 1 blank line.</i></p>
+
+        <textarea [(ngModel)]="songText"></textarea>
+        <button (click)="processText()">Generate editor</button>
+    </div>
+
+    <div class="song-content">
+        @if (songSections.length > 0) {
+            <p><i>Fill in the chords using the grey blocks.</i></p>
+        }
+        @for (section of songSections; track section; let sectionIndex = $index) {
+            <div class="song-section">
+                <h3 contenteditable="true" (keyup)="updateSectionName($event)" id="section-{{sectionIndex}}">{{section.name}}</h3>
+                @for (line of section.lines; track line; let lineIndex = $index) {
+                    <div class="song-line">
+                        @for (word of line.words; track word; let wordIndex = $index){
+                            <div class="in-between-block">
+                                <div class="chord-block" contenteditable="true" (input)="updateChord($event, sectionIndex, lineIndex, wordIndex, 0)">{{word.chords[0]}}</div>
+                            </div>
+                            <div class="song-word">
+                                <div class="chord-block" contenteditable="true" (input)="updateChord($event, sectionIndex, lineIndex, wordIndex, 1)">{{word.chords[1]}}</div>
+                                <div class="text-block">{{word.text}}</div>
+                            </div>
+                            @if (wordIndex === line.words.length -1) {
+                                <div class="in-between-block">
+                                    <div class="chord-block" contenteditable="true" (input)="updateChord($event, sectionIndex, lineIndex, wordIndex, 2)">{{word.chords[2]}}</div>
+                                </div>
+                            }
+                        } 
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="export-actions">
+        <button (click)="exportSong()">Export song</button>
+    </div>
 </div>

@@ -10,7 +10,7 @@ export class Navbar {
     title = "ChordEditor";
     menuOpened = false;
     navbarItems = [
-        {'text': 'Home', 'url': '/'},
+        {'text': 'Home', 'url': '/create'},
         {'text': 'About', 'url': '/about'},
     ]
 

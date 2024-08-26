@@ -70,11 +70,6 @@
     flex-direction: column;
   }
 
-  SongEditor {
-    
-    padding: 1rem;
-  }
-
   .content {
     display: flex;
     justify-content: space-around;
