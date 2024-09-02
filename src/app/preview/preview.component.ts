@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { interval } from 'rxjs';
 
 // TODO: create service with interfaces
 interface SongWord {
@@ -32,6 +33,7 @@ export class Preview {
 	songText = '';
 	songSections: SongSection[] = [];
 	displayInfo = true;
+	printing = false;
 
   	ngOnInit() {
 		const navigation = this.router.getCurrentNavigation();
@@ -55,6 +57,30 @@ export class Preview {
 		}
 	}
 
+	sleep = async (time: number, unit: string) => {
+		switch(unit){
+		  case 'ms':
+			return new Promise(resolve => setTimeout(resolve, time));
+			break;
+	  
+		  case 's':
+			return new Promise(resolve => setTimeout(resolve, time*1000));
+			break;
+	  
+		  case 'm':
+			return new Promise(resolve => setTimeout(resolve, time*60000));
+			break;
+			
+		  case 'h':
+			return new Promise(resolve => setTimeout(resolve, time*3600000));
+			break;
+	  
+		  default:
+			throw new Error(`Sleep unit measure not recognized.\nSupported: ms, s, m, h.\nGiven: ${unit}`);
+			break;
+		}
+	  }
+
 	toggleInfo() {
 		this.displayInfo = !this.displayInfo;
 	}
@@ -71,5 +97,10 @@ export class Preview {
 		this.router.navigate(['/create'], { queryParams: { cache: true }, state: { data: data } });
 	}
 
-	printSong() {}
+	async printSong() {
+		this.printing = true;
+		await this.sleep(100, 'ms');
+		window.print();
+		this.printing = false;
+	}
 }

@@ -52,7 +52,8 @@
 }
 
 .in-between-block {
-    margin: 1vw .5vw;
+    align-self: flex-start;
+    margin: 0 .5vw 2vw .5vw;
     min-width: fit-content;
 } 
 

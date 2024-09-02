@@ -41,8 +41,10 @@
         }
     </div>
 
-    <div class="export-actions">
-        <button (click)="backToEdit()">Continue Editing</button>
-        <button (click)="printSong()">Print</button>
-    </div>
+    @if (!printing) {
+        <div class="export-actions">
+            <button (click)="backToEdit()">Continue Editing</button>
+            <button (click)="printSong()" title="If the text is too big, change the scale property in the printing screen options!">Print</button>
+        </div>
+    }
 </div>
