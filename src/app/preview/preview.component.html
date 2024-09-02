@@ -1,1 +1,48 @@
-<p>preview works!</p>
+<div class="song-preview">
+    <div class="song-info">
+        <h1 (click)="toggleInfo()">
+            @if (displayInfo) {
+                <i class="fa-solid fa-chevron-up"></i>
+            } @else {
+                <i class="fa-solid fa-chevron-up fa-rotate-180"></i>
+            }
+            Song information
+        </h1>
+        @if (displayInfo) {
+            <h3>{{songTitle}}</h3>
+            <p><i>{{songAuthor}}</i></p>
+            <p><i>Key: {{songKey}}</i></p>
+        }
+    </div>
+
+    <div class="song-content">
+        @for (section of songSections; track section; let sectionIndex = $index) {
+            <div class="song-section">
+                <h3 id="section-{{sectionIndex}}">{{section.name}}</h3>
+                @for (line of section.lines; track line; let lineIndex = $index) {
+                    <div class="song-line">
+                        @for (word of line.words; track word; let wordIndex = $index){
+                            <div class="in-between-block">
+                                <div class="chord-block">{{word.chords[0]}}</div>
+                            </div>
+                            <div class="song-word">
+                                <div class="chord-block">{{word.chords[1]}}</div>
+                                <div class="text-block">{{word.text}}</div>
+                            </div>
+                            @if (wordIndex === line.words.length -1) {
+                                <div class="in-between-block">
+                                    <div class="chord-block">{{word.chords[2]}}</div>
+                                </div>
+                            }
+                        } 
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="export-actions">
+        <button (click)="backToEdit()">Continue Editing</button>
+        <button (click)="printSong()">Print</button>
+    </div>
+</div>

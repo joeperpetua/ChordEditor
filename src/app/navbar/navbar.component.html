@@ -13,7 +13,7 @@
 @if (menuOpened) {
     <div class="menu">
         @for (item of navbarItems; track item.text) {
-            <a href="{{item.url}}" class="menu-item">{{item.text}}</a>
+            <a routerLink="{{item.url}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="menu-item">{{item.text}}</a>
         }
     </div>
 }

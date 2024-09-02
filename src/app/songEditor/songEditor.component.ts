@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { FormsModule } from '@angular/forms';
+import { Router, ActivatedRoute } from "@angular/router";
 
 interface SongWord {
     text: string,
@@ -24,6 +25,8 @@ interface SongSection {
 })
 
 export class SongEditor {
+    constructor(private router: Router, private route: ActivatedRoute) { };
+
     songTitle = '';
     songAuthor = '';
     songKey = '';
@@ -31,18 +34,41 @@ export class SongEditor {
     songSections: SongSection[] = [];
     displayInfo = true;
 
+    ngOnInit(){
+        const navigation = this.router.getCurrentNavigation();
+        const cache = this.route.snapshot.queryParams['cache'];
+        let data = navigation?.extras?.state?.['data']; 
+    
+        // Fallback to history.state if no navigation data exists
+        if (!data && cache === 'true') {
+            data = history.state.data;
+        }
+    
+        if (data) {
+            console.log('received to edit', data);
+            const { songTitle, songAuthor, songKey, songText, songSections } = data;
+            this.songTitle = songTitle;
+            this.songAuthor = songAuthor;
+            this.songKey = songKey;
+            this.songText = songText || 'no data';
+            this.songSections = songSections;
+        } else {
+            console.log('No data passed to edit', cache);
+        }
+      }
+
     toggleInfo() {
         this.displayInfo = !this.displayInfo;
     }
 
     updateTitle(ev: Event) {
         const target = ev.target as HTMLInputElement; 
-        this.songAuthor = target.value;
+        this.songTitle = target.value;
     }
 
     updateAuthor(ev: Event) {
         const target = ev.target as HTMLInputElement; 
-        this.songTitle = target.value;
+        this.songAuthor = target.value;
     }
 
     updateKey(ev: Event) {
@@ -78,6 +104,18 @@ export class SongEditor {
 
     exportSong() {
         console.log(this.songSections);
+    }
+
+    previewSong() {
+        const data = {
+            'songTitle': this.songTitle,
+            'songAuthor': this.songAuthor,
+            'songKey': this.songKey,
+            'songText': this.songText,
+            'songSections': this.songSections
+        };
+        console.log('sending to preview', data);
+        this.router.navigate(['/preview'], { state: { data: data } });
     }
 
     processText() {

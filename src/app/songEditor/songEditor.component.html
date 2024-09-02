@@ -10,15 +10,15 @@
         </h1>
         @if (displayInfo) {
             <label for="song-title">Title
-                <input type="text" name="song-title" id="song-title" placeholder="Type the song title" (change)="updateTitle($event)">
+                <input type="text" name="song-title" id="song-title" placeholder="Type the song title" (change)="updateTitle($event)" [defaultValue]=songTitle>
             </label>
         
             <label for="song-title">Author
-                <input type="text" name="song-author" id="song-author" placeholder="Type the song author" (change)="updateAuthor($event)">
+                <input type="text" name="song-author" id="song-author" placeholder="Type the song author" (change)="updateAuthor($event)"  [defaultValue]=songAuthor>
             </label>
         
             <label for="song-title">Key
-                <input type="text" name="song-key" id="song-key" placeholder="Type the song key" (change)="updateKey($event)">
+                <input type="text" name="song-key" id="song-key" placeholder="Type the song key" (change)="updateKey($event)" [defaultValue]=songKey>
             </label>
         }
     </div>
@@ -61,6 +61,9 @@
     </div>
 
     <div class="export-actions">
-        <button (click)="exportSong()">Export song</button>
+        @if (songSections.length > 0) {
+            <button (click)="previewSong()">Preview song</button>
+            <button (click)="exportSong()">Export song</button>
+        }
     </div>
 </div>

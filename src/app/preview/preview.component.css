@@ -1,0 +1,74 @@
+.song-preview {
+    padding: 1rem;
+}
+
+.song-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.song-info h1 {
+    cursor: pointer;
+    user-select: none;
+    width: fit-content;
+}
+
+.song-info label {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.song-info h3{
+    font-size: 2rem;
+    margin: 0;
+}
+
+.song-info p{
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.song-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 1.5rem;
+}
+
+.song-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.song-word {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0;
+    min-width: fit-content;
+}
+
+.in-between-block {
+    margin: 1vw .5vw;
+    min-width: fit-content;
+} 
+
+.export-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+button {
+    width: fit-content;
+    align-self: flex-end;
+    background-color: white;
+    border-radius: 12rem;
+    cursor: pointer;
+    margin: 1rem;
+    padding: 1rem;
+    font-size: 1rem;
+}

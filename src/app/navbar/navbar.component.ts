@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'navbar',
     standalone: true,
     templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.css'
+    styleUrl: './navbar.component.css',
+    imports: [RouterLink, RouterLinkActive]
 })
 export class Navbar {
     title = "ChordEditor";
