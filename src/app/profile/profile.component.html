@@ -1,0 +1,12 @@
+@if (auth.user$ | async; as user) {
+    <h1>Account Information:</h1>
+    <ul>
+        <li *ngIf="user.nickname">Username: {{user.nickname}}</li>
+        <li *ngIf="user.given_name">Name: {{user.given_name}}</li>
+        <li *ngIf="user.family_name">Surname: {{user.family_name}}</li>
+        <li *ngIf="user.email">Email: {{user.email}}</li>
+    </ul>
+    <button (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })">Log out</button>
+} @else {
+    <h1>Not logged in!</h1>
+}    

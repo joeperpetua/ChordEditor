@@ -19,7 +19,7 @@
     margin: 1rem;
 }
 
-.song-info input {
+.song-info input, .section-title {
     padding: 1rem;
     width: 50%;
     border: solid grey 1;
@@ -53,22 +53,22 @@
     resize: none;
 }
 
-.song-source button, button {
-    width: fit-content;
-    align-self: flex-end;
-    background-color: white;
-    border-radius: 12rem;
-    cursor: pointer;
-    margin: 1rem;
-    padding: 1rem;
-    font-size: 1rem;
-}
-
 .song-content {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     font-size: 1.5rem;
+}
+
+.section-title-container {
+    min-width: 3vw;
+    width: fit-content;
+}
+
+.section-title {
+    width: 80%;
+    padding: .25rem;
+    font-size: 2rem;
 }
 
 .song-line {

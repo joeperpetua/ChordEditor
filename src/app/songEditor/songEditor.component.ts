@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
 import { Router, ActivatedRoute } from "@angular/router";
+import { CaretService } from "../services/caret.service";
 
 interface SongWord {
     text: string,
@@ -21,7 +23,7 @@ interface SongSection {
     standalone: true,
     templateUrl: './songEditor.component.html',
     styleUrl: './songEditor.component.css',
-    imports: [FormsModule]
+    imports: [FormsModule, CommonModule]
 })
 
 export class SongEditor {
@@ -77,29 +79,24 @@ export class SongEditor {
     }
 
     updateSectionName(ev: Event){
-        const target = ev.target as HTMLHeadingElement;
-        if (!target.textContent)
+        const target = ev.target as HTMLInputElement;
+        if (!target.value)
             return
         const index = parseInt(target.id.replace('section-', ''));
-        this.songSections[index].name = target.textContent;
+        this.songSections[index].name = target.value;
     }
 
     updateChord(ev: Event, section: number, line: number, word: number, chord: number){
         const target = ev.target as HTMLDivElement;
         if (!target.textContent)
             return
-
         const inputText = target.textContent;
-        this.songSections[section].lines[line].words[word].chords[chord] = inputText;
+        const caretPos = CaretService.getCaretPosition(target);
+        
+        this.songSections[section].lines[line].words[word].chords[chord] = target.textContent;
         target.textContent = inputText; // Re-set element text to avoid double characters due to re-rendering.
 
-        // Set caret to end of text
-        const range = document.createRange();
-        const selection = window.getSelection();
-        range.selectNodeContents(target);
-        range.collapse(false);
-        selection?.removeAllRanges();
-        selection?.addRange(range);
+        CaretService.setCaretPosition(target, caretPos);
     }
 
     exportSong() {

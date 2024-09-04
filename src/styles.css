@@ -1,4 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
 body {
     margin: 0;
+}
+
+.router-content {
+    padding: 2rem;
+}
+
+button {
+    width: fit-content;
+    align-self: flex-end;
+    color: black;
+    background-color: white;
+    border-radius: 12rem;
+    cursor: pointer;
+    margin: 1rem;
+    padding: 1rem;
+    font-size: 1rem;
+    transition: ease .25s;
+}
+
+.icon-btn {
+    min-width: 6vw;
+}
+
+button:hover {
+    color: white;
+    background-color: black;
+}
+
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

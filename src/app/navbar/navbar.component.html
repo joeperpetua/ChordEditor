@@ -8,12 +8,21 @@
         }
     </div>
     <div class="title">{{title}}</div>
+    <div>
+        @if(auth.isAuthenticated$ | async) {
+            <button routerLink="/profile" routerLinkActive="active" ariaCurrentWhenActive="page" class="icon-btn">
+                <i class="fa-solid fa-user"></i>
+            </button>
+        } @else {
+            <button (click)="auth.loginWithRedirect()">Log in</button>
+        }
+    </div>
 </div>
 
 @if (menuOpened) {
     <div class="menu">
         @for (item of navbarItems; track item.text) {
-            <a routerLink="{{item.url}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="menu-item">{{item.text}}</a>
+            <a routerLink="{{item.url}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="menu-item" (click)="toggleMenu()">{{item.text}}</a>
         }
     </div>
 }

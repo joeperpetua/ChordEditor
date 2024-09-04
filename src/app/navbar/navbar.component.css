@@ -5,30 +5,32 @@
     align-items: center;
     justify-content: space-between;
     font-size: 2rem;
+    border-bottom: solid grey 1px;
 }
 
 .burger {
     cursor: pointer;
+    min-width: 6vw;
 }
 
 .menu {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: fit-content;
     font-size: 1.25rem;
-    position: absolute;
-    top: 4rem;
-    right: 0;
+    align-self: flex-start;
 }
 
 .menu-item {
-    text-align: right;
-    padding: 1.5rem 2rem;
+    text-align: left;
+    padding: 1.5rem 2.5rem;
     text-decoration: none;
     background-color: white;
     color: black;
+    transition: ease .25s;
 }
 
 .menu-item:hover {
-    background-color: lightgray;
+    color: white;
+    background-color: black;
 }

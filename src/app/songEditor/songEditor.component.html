@@ -1,4 +1,5 @@
 <div class="song-editor">
+    <h1>Create new entry:</h1>
     <div class="song-info">
         <h1 (click)="toggleInfo()">
             @if (displayInfo) {
@@ -37,7 +38,9 @@
         }
         @for (section of songSections; track section; let sectionIndex = $index) {
             <div class="song-section">
-                <h3 contenteditable="true" (keyup)="updateSectionName($event)" id="section-{{sectionIndex}}">{{section.name}}</h3>
+                <div class="section-title-container">
+                    <input class="section-title" type="text" id="section-{{sectionIndex}}" size="{{section.name.length}}" value="{{section.name}}" (input)="updateSectionName($event)">
+                </div>
                 @for (line of section.lines; track line; let lineIndex = $index) {
                     <div class="song-line">
                         @for (word of line.words; track word; let wordIndex = $index){
