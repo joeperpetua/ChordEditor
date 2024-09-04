@@ -127,7 +127,6 @@ export class SongEditor {
     }
 
     processText() {
-        // const rawText = document.querySelector('.song-source')?.querySelector('textarea')?.value;
         const rawText = this.songText;
         if (!rawText)
             return
@@ -149,9 +148,5 @@ export class SongEditor {
             songSections.push({'name': `Section ${index + 1}`, lines: sectionLines})
         })
         this.songSections = songSections;
-
-        console.log(rawText);
-        console.log(songSections);
-        console.log(songSections[0].lines[0].words[0].text);
     }
 }
