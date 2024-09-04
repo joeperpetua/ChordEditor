@@ -39,11 +39,22 @@ export class SongEditor {
     ngOnInit(){
         const navigation = this.router.getCurrentNavigation();
         const cache = this.route.snapshot.queryParams['cache'];
+        const dev = this.route.snapshot.queryParams['dev'];
         let data = navigation?.extras?.state?.['data']; 
     
         // Fallback to history.state if no navigation data exists
         if (!data && cache === 'true') {
             data = history.state.data;
+        }
+
+        if (dev === 'true') {
+            data = {
+                'songTitle': 'Tu Fidelidad',
+                'songAuthor': 'Marcos Witt',
+                'songKey': 'C',
+                'songText': 'Tu fidelidad es grande\nTu fidelidad incomparable es\nNadie como tú, bendito Dios\nGrande es tu fidelidad\n\nTu fidelidad es grande\nTu fidelidad incomparable es\nNadie como tú, bendito Dios\nGrande es tu fidelidad',
+                'songSections': [{name:"Verse 1",lines:[{words:[{text:"Tu",chords:["G#m9/E","",""]},{text:"fidelidad",chords:["","C#m",""]},{text:"es",chords:["Bm","A7",""]},{text:"grande",chords:["","G/D",""]}]},{words:[{text:"Tu",chords:["","",""]},{text:"fidelidad",chords:["","",""]},{text:"incomparable",chords:["","C#",""]},{text:"es",chords:["","",""]}]},{words:[{text:"Nadie",chords:["","Am",""]},{text:"como",chords:["","",""]},{text:"t\xfa,",chords:["","",""]},{text:"bendito",chords:["","",""]},{text:"Dios",chords:["","",""]}]},{words:[{text:"Grande",chords:["","",""]},{text:"es",chords:["","",""]},{text:"tu",chords:["","",""]},{text:"fidelidad",chords:["","Bm",""]}]}]},{name:"Chorus",lines:[{words:[{text:"Tu",chords:["","",""]},{text:"fidelidad",chords:["","C#",""]},{text:"es",chords:["","Am7",""]},{text:"grande",chords:["","",""]}]},{words:[{text:"Tu",chords:["Fm","",""]},{text:"fidelidad",chords:["","",""]},{text:"incomparable",chords:["","\xa0 \xa0 \xa0 \xa0 \xa0 \xa0 A7",""]},{text:"es",chords:["","",""]}]},{words:[{text:"Nadie",chords:["","Cb",""]},{text:"como",chords:["","",""]},{text:"t\xfa,",chords:["","",""]},{text:"bendito",chords:["","",""]},{text:"Dios",chords:["","",""]}]},{words:[{text:"Grande",chords:["","",""]},{text:"es",chords:["","",""]},{text:"tu",chords:["","",""]},{text:"fidelidad",chords:["","Bm7",""]}]}]}]
+            };
         }
     
         if (data) {
